@@ -1,0 +1,4 @@
+Estou lendo um arquivo,
+que pode ter,
+diversas,
+linhas.
