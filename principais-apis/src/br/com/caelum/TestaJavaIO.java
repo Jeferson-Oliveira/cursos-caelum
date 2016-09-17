@@ -35,8 +35,7 @@ public class TestaJavaIO {
 			linha = br.readLine();
 		}
 		
-		br.close();
-		bw.close();
+
 		fechaArquivos(br,bw);
 	
 		
