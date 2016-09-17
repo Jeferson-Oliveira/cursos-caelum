@@ -11,7 +11,7 @@ public abstract class Conta {
 	
 	protected String nomeCliente;
 	protected double saldo;
-	protected int agencia;
+	protected Integer agencia;
 	protected int numero;
 	
 	public String getNomeCliente() {
@@ -52,12 +52,25 @@ public abstract class Conta {
 		return agencia;
 	}
 	
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Conta)) return false;
+		Conta c = (Conta) obj;
+		if(c.getNumero().equals(c.getNumero()))return true;
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "Conta com saldo R$:" + this.saldo;
+	}
+
 }
