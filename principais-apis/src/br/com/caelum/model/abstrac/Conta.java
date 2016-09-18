@@ -1,13 +1,14 @@
 package br.com.caelum.model.abstrac;
 
 import br.com.caelum.exceptions.ValorDeSaqueInvalidoException;
+import br.com.caelum.model.concrect.ContaCorrente;
 
 /**
  * Classe abastrata que representa uma Conta
  * @author jefer
  *
  */
-public abstract class Conta {
+public abstract class Conta implements Comparable<Conta>{
 	
 	protected String nomeCliente;
 	protected double saldo;
@@ -60,17 +61,46 @@ public abstract class Conta {
 		this.numero = numero;
 	}
 	
+
+	
 	@Override
-	public boolean equals(Object obj) {
-		if(!(obj instanceof Conta)) return false;
-		Conta c = (Conta) obj;
-		if(c.getNumero().equals(c.getNumero()))return true;
-		return false;
+	public int compareTo(Conta o) {
+		if(this.getNumero() < o.getNumero()) return -1;
+		if(this.getNumero() > o.getNumero()) return 1;
+		return 0;
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nomeCliente == null) ? 0 : nomeCliente.hashCode());
+		result = prime * result + numero;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Conta other = (Conta) obj;
+		if (nomeCliente == null) {
+			if (other.nomeCliente != null)
+				return false;
+		} else if (!nomeCliente.equals(other.nomeCliente))
+			return false;
+		if (numero != other.numero)
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return "Conta com saldo R$:" + this.saldo;
+		return "número: " + this.numero;
 	}
 
 }
