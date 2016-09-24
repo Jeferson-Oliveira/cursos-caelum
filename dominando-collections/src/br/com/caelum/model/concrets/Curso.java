@@ -3,16 +3,19 @@ package br.com.caelum.model.concrets;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
 
 public class Curso {
 	private String nome;
 	private String instrutor;
 	private List<Aula> aulas = new LinkedList<>();
 	private Set<Aluno> alunos = new HashSet<>(); // new LinkedHashSet(); caso queira que os itens sejam agrupados por ordem de inserção
+	private HashMap<Integer, Aluno> alunoMatricula = new HashMap<>();
 	
  	public Curso(String nome, String instrutor) {
 		this.nome = nome;
@@ -27,11 +30,17 @@ public class Curso {
 	}
 	
 	public void matricular(Aluno aluno){
+		if(aluno.getNumeroMatricula() == null){
+			throw new IllegalArgumentException("Número de matrícula inválido");
+		}
 		this.alunos.add(aluno);
+		this.alunoMatricula.put(aluno.getNumeroMatricula(), aluno);
 	}
 	
-	public void matricular(Aluno... alunos){
-		this.alunos.addAll(Arrays.asList(alunos));
+	public void matricular(Collection<Aluno> alunos){
+		alunos.forEach(aluno -> {
+			this.matricular(aluno);
+		});
 	}
 	
 	public void setAula(Aula aula){
@@ -60,6 +69,10 @@ public class Curso {
 			tempoTotal += aula.getTempo();
 		}
 		return tempoTotal;
+	}
+	
+	public Aluno buscarPorMatricula(Integer matricula){
+		return this.alunoMatricula.get(matricula);
 	}
 	
 	public Boolean estaMatriculado(Aluno aluno){
