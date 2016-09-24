@@ -28,10 +28,13 @@ public class TestaCursoComAluno {
 						new Aluno("Jeferson", 1234),
 						new Aluno("Carlos", 4567),
 						new Aluno("Felipe",9101),
-						new Aluno("Aline",5544)
+						new Aluno("Aline",5544),
+						new Aluno("Lucas", 4567)// Não vai adicionar
 						));
 		
 		System.out.println(curso.getAlunos());
+		
+		System.out.println(curso.estaMatriculado(new Aluno("Felipe", 9101)));
 		
 
 	}
