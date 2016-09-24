@@ -1,6 +1,6 @@
 package br.com.caelum.model.concrets;
 
-public class Aluno {
+public class Aluno{
 	private String nome;
 	private Integer numeroMatricula;
 	

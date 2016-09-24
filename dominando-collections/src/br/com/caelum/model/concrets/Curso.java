@@ -1,5 +1,6 @@
 package br.com.caelum.model.concrets;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -11,7 +12,7 @@ public class Curso {
 	private String nome;
 	private String instrutor;
 	private List<Aula> aulas = new LinkedList<>();
-	private Set<Aluno> alunos = new HashSet<>();
+	private Set<Aluno> alunos = new HashSet<>(); // new LinkedHashSet(); caso queira que os itens sejam agrupados por ordem de inserção
 	
  	public Curso(String nome, String instrutor) {
 		this.nome = nome;
@@ -29,8 +30,8 @@ public class Curso {
 		this.alunos.add(aluno);
 	}
 	
-	public void matricular(Collection<Aluno> alunos){
-		this.alunos.addAll(alunos);
+	public void matricular(Aluno... alunos){
+		this.alunos.addAll(Arrays.asList(alunos));
 	}
 	
 	public void setAula(Aula aula){
