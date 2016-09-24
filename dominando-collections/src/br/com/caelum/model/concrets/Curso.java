@@ -37,4 +37,15 @@ public class Curso {
 		return Collections.unmodifiableList(aulas);
 	}
 	
+	public Integer getTempoTotal(){
+		Integer tempoTotal = 0;
+		for (Aula aula : aulas) {
+			tempoTotal += aula.getTempo();
+		}
+		return tempoTotal;
+	}
+	
+	public String toString(){
+	    return "[Curso: " + this.nome + ", Tempo: " + this.getTempoTotal()+"]";
+	}
 }
