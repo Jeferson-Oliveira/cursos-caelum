@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	>
+	
+	<ui:composition template="/templates/_mainLayout.xhtml">
+	
+		<f:metadata>
+			<f:viewParam name="autorId" value="#{autorBean.autor.id}"/>
+			<f:viewAction action="#{autorBean.buscaPorId}" if="#{param.autorId != null}"/>
+		</f:metadata>
+		
+		<ui:define name="cabecalho">Novo Autor</ui:define>
+		<ui:define name="conteudo">
+			<h:form>
+				<fieldset>
+					<legend>Dados do Autor</legend>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome:" for="nome" />
+						<h:inputText id="nome" value="#{autorBean.autor.nome}" />
+						
+						<h:outputLabel value="Email: " for="email" />
+						<h:inputText id="email" value="#{autorBean.autor.email}" >
+							<f:passThroughAttribute name="type" value="email"/>
+						</h:inputText>
+						<h:commandButton value="Gravar" action="#{autorBean.gravar}" />
+					</h:panelGrid>
+				</fieldset>
+			</h:form>
+			<h:form>
+				<fieldset>
+					<legend>Autores</legend>
+					<h:panelGrid columns="2">
+						<h:dataTable var="autor" value="#{autorBean.autores}" >
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Nome"/>
+								</f:facet>
+								<h:outputText value="#{autor.nome}"/>
+							</h:column>
+							<h:column>
+								<f:facet name="header">
+									<h:outputText value="Ação"/>
+								</f:facet>
+								<h:commandLink action="#{autorBean.remove(autor)}" value="X"/>&nbsp;
+								<h:commandLink action="#{autorBean.carrega(autor)}" value="Alterar"/>
+							</h:column>
+						</h:dataTable>
+					</h:panelGrid>
+				</fieldset>
+			</h:form>	
+		</ui:define>
+	</ui:composition>
+	
+	<h:body>
+		<h1></h1>
+		
+	</h:body>
+
+</html>
